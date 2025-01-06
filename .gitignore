@@ -1,0 +1,27 @@
+# Node.js関連
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ビルド成果物
+.next/
+out/
+
+# 環境ファイル
+.env
+.env.local
+.env.*.local
+
+# OS/IDE関連
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# テストカバレッジ
+coverage/
+
+# その他
+npm-debug.log*
