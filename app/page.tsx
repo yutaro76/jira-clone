@@ -1,7 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { SelectTrigger } from '@/components/ui/select';
-import { TestComponent } from '@/features/test';
 
 export default function Home() {
   return (
