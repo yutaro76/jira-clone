@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 
 // ロゴを使うためのコンポーネント。下記のinterを使うために必要。shadcnのcn。
 import { cn } from '@/lib/utils';
-
+import { QueryProvider } from '@/components/query-provider';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang='en'>
       {/* antialiasedはフォントを滑らかにするためのクラス。 */}
       <body className={cn(inter.className, 'antialiased min-h-screen')}>
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

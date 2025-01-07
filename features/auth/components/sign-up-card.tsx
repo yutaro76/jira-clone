@@ -23,18 +23,23 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema } from '../schemas';
+import { useRegister } from '../api/use-register';
 
+// registerSchemaで代わりに代用のためコメントアウト
 // zodのスキーマを定義
-const formSchema = z.object({
-  name: z.string().trim().min(1, 'Required'),
-  email: z.string().email(),
-  password: z.string().min(8, 'Minimum 8 characters required'),
-});
+// const formSchema = z.object({
+//   name: z.string().trim().min(1, 'Required'),
+//   email: z.string().email(),
+//   password: z.string().min(8, 'Minimum 8 characters required'),
+// });
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { mutate } = useRegister();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
     // formSchemaでバリデーションを行う。
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -42,8 +47,8 @@ export const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
   };
 
   return (
