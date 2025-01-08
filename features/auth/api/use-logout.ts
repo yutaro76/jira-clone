@@ -5,6 +5,7 @@ import { InferRequestType, InferResponseType } from 'hono';
 
 // clientを使ってAPIエンドポイントにリクエストを送信する。
 import { client } from '@/lib/rpc';
+import { useRouter } from 'next/navigation';
 
 // レスポンスを型として利用可能にする
 type ResponseType = InferResponseType<(typeof client.api.auth.logout)['$post']>;
@@ -13,6 +14,7 @@ type RequestType = InferRequestType<(typeof client.api.auth.logout)['$post']>;
 
 // useLoginとして作成し、再利用可能にする
 export const useLogout = () => {
+  const router = useRouter();
   // 現在のクエリのキャッシュを取得する
   const queryClient = useQueryClient();
   // 第1型引数 (ResponseType): 成功時のレスポンス型。
@@ -24,7 +26,7 @@ export const useLogout = () => {
       return await response.json();
     },
     onSuccess: () => {
-      // クエリを無効にする
+      router.refresh();
       queryClient.invalidateQueries({ queryKey: ['current'] });
     },
   });

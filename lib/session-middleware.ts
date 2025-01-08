@@ -39,7 +39,7 @@ export const sessionMiddleware = createMiddleware<AdditionalContext>(
 
     // セッションが存在しない場合は、Unauthorizedエラーを返す
     if (!session) {
-      return c.json({ erroe: 'Unauthorized' }, 401);
+      return c.json({ error: 'Unauthorized' }, 401);
     }
 
     // クライアントにセッションを追加
