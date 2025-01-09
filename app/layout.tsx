@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Toaster } from '@/components/ui/sonner';
 
 // ロゴを使うためのコンポーネント。下記のinterを使うために必要。shadcnのcn。
 import { cn } from '@/lib/utils';
@@ -22,6 +23,7 @@ export default function RootLayout({
     <html lang='en'>
       {/* antialiasedはフォントを滑らかにするためのクラス。 */}
       <body className={cn(inter.className, 'antialiased min-h-screen')}>
+        <Toaster />
         <QueryProvider>{children}</QueryProvider>
       </body>
     </html>

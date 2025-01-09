@@ -1,3 +1,5 @@
+import { toast } from 'sonner';
+
 // 非同期操作を簡単に扱うためのツールを提供。
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 // APIのリクエスト型とレスポンス型を自動的に取得し、型安全を保証する。
@@ -24,11 +26,18 @@ export const useRegister = () => {
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ json }) => {
       const response = await client.api.auth.register['$post']({ json });
+      if (!response.ok) {
+        throw new Error('Failed to register');
+      }
       return await response.json();
     },
     onSuccess: () => {
+      toast.success('Registered');
       router.refresh();
       queryClient.invalidateQueries({ queryKey: ['current'] });
+    },
+    onError: () => {
+      toast.error('Failed to register');
     },
   });
   return mutation;
