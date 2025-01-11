@@ -17,6 +17,7 @@ const routes = app.route('/auth', auth).route('/workspaces', workspaces);
 export const GET = handle(app);
 export const POST = handle(app);
 export const PATCH = handle(app);
+export const DELETE = handle(app);
 
 // ルートの型をエクスポート。
 // これにより、他のファイルでルートをインポートして型を使用できる。
