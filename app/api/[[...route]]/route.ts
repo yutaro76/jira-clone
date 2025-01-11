@@ -2,8 +2,9 @@ import { Hono } from 'hono';
 import { handle } from 'hono/vercel';
 
 import auth from '@/features/auth/server/route';
-import workspaces from '@/features/workspaces/server/route';
 import members from '@/features/members/server/route';
+import workspaces from '@/features/workspaces/server/route';
+import projects from '@/features/projects/server/route';
 
 // Honoフレームワークの新しいインスタンスを作成し、ベースパスを/apiに設定。
 // これにより、すべてのルートが/apiから始まるようになる。
@@ -14,7 +15,8 @@ const app = new Hono().basePath('/api');
 const routes = app
   .route('/auth', auth)
   .route('/workspaces', workspaces)
-  .route('/members', members);
+  .route('/members', members)
+  .route('/projects', projects);
 
 // appインスタンスをhandle関数に渡し、GETリクエストのハンドラをエクスポート。
 // これにより、GETリクエストがappで定義されたルートに従って処理される。
