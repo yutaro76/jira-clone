@@ -10,7 +10,7 @@ import {
 } from '@/config';
 import { ID, Query } from 'node-appwrite';
 import { MemberRole } from '@/features/members/types';
-import { genereateInviteCode } from '@/lib/utils';
+import { generateInviteCode } from '@/lib/utils';
 import { getMember } from '@/features/members/utils';
 
 const app = new Hono()
@@ -75,7 +75,7 @@ const app = new Hono()
           name,
           userId: user.$id,
           imageUrl: uploadedImageUrl,
-          inviteCode: genereateInviteCode(6),
+          inviteCode: generateInviteCode(6),
         }
       );
 
@@ -162,6 +162,31 @@ const app = new Hono()
     await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
 
     return c.json({ data: { $id: workspaceId } });
-  });
+  })
+  .post('/:workspaceId/reset-invite-code', sessionMiddleware, async (c) => {
+    const databases = c.get('databases');
+    const user = c.get('user');
 
+    const { workspaceId } = c.req.param();
+    const member = await getMember({
+      databases,
+      workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member || member.role !== MemberRole.ADMIN) {
+      return c.json({ error: 'Unauthrized' }, 401);
+    }
+
+    const workspace = await databases.updateDocument(
+      DATABASE_ID,
+      WORKSPACES_ID,
+      workspaceId,
+      {
+        inviteCode: generateInviteCode(6),
+      }
+    );
+
+    return c.json({ data: workspace });
+  });
 export default app;
