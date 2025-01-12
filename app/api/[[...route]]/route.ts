@@ -5,6 +5,7 @@ import auth from '@/features/auth/server/route';
 import members from '@/features/members/server/route';
 import workspaces from '@/features/workspaces/server/route';
 import projects from '@/features/projects/server/route';
+import tasks from '@/features/tasks/server/route';
 
 // Honoフレームワークの新しいインスタンスを作成し、ベースパスを/apiに設定。
 // これにより、すべてのルートが/apiから始まるようになる。
@@ -16,7 +17,8 @@ const routes = app
   .route('/auth', auth)
   .route('/workspaces', workspaces)
   .route('/members', members)
-  .route('/projects', projects);
+  .route('/projects', projects)
+  .route('/tasks', tasks);
 
 // appインスタンスをhandle関数に渡し、GETリクエストのハンドラをエクスポート。
 // これにより、GETリクエストがappで定義されたルートに従って処理される。
