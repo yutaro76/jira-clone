@@ -10,40 +10,39 @@ import { useRouter } from 'next/navigation';
 
 // レスポンスを型として利用可能にする
 type ResponseType = InferResponseType<
-  (typeof client.api.workspaces)[':workspaceId']['$patch'],
+  (typeof client.api.projects)[':projectId']['$delete'],
   200
 >;
 // リクエストを型として利用可能にする
 type RequestType = InferRequestType<
-  (typeof client.api.workspaces)[':workspaceId']['$patch']
+  (typeof client.api.projects)[':projectId']['$delete']
 >;
 
-// updateWorkspaceとして作成し、再利用可能にする
-export const useUpdateWorkspace = () => {
+// useCreateWorkspaceとして作成し、再利用可能にする
+export const useDeleteProject = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   // 第1型引数 (ResponseType): 成功時のレスポンス型。
   // 第2型引数 (Error): エラー時の型。
   // 第3型引数 (RequestType): リクエスト時の型。
   const mutation = useMutation<ResponseType, Error, RequestType>({
-    mutationFn: async ({ form, param }) => {
-      const response = await client.api.workspaces[':workspaceId']['$patch']({
-        form,
+    mutationFn: async ({ param }) => {
+      const response = await client.api.projects[':projectId']['$delete']({
         param,
       });
       if (!response.ok) {
-        throw new Error('Failed to update workspace');
+        throw new Error('Failed to delete project');
       }
       return await response.json();
     },
     onSuccess: ({ data }) => {
-      toast.success('Workspace updated');
+      toast.success('Peoject deleted');
       router.refresh();
-      queryClient.invalidateQueries({ queryKey: ['workspaces'] });
-      queryClient.invalidateQueries({ queryKey: ['workspace', data.$id] });
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      queryClient.invalidateQueries({ queryKey: ['project', data.$id] });
     },
     onError: () => {
-      toast.error('Failed to create workspace');
+      toast.error('Failed to delete project');
     },
   });
   return mutation;
