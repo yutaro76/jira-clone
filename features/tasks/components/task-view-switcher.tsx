@@ -1,16 +1,18 @@
 'use client';
 
+import React from 'react';
 import { DottedSeparator } from '@/components/dotted-separator';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Loader, PlusIcon } from 'lucide-react';
-import React from 'react';
 import { useCreateTaskModal } from '../hooks/use-create-task-modal';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id';
 import { useGetTasks } from '../api/use-get-tasks';
 import { useQueryState } from 'nuqs';
 import { DataFilters } from './data-fileters';
 import { useTaskFilters } from '../hooks/use-task-filters';
+import { DataTable } from './data-table';
+import { columns } from './columns';
 
 const TaskViewSwitcher = () => {
   const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters();
@@ -62,7 +64,7 @@ const TaskViewSwitcher = () => {
         ) : (
           <>
             <TabsContent value='table' className='mt-0'>
-              {JSON.stringify(tasks)}
+              <DataTable columns={columns} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value='kanban' className='mt-0'>
               {JSON.stringify(tasks)}
