@@ -6,7 +6,6 @@ import { InferRequestType, InferResponseType } from 'hono';
 
 // clientを使ってAPIエンドポイントにリクエストを送信する。
 import { client } from '@/lib/rpc';
-import { useRouter } from 'next/navigation';
 
 // レスポンスを型として利用可能にする
 type ResponseType = InferResponseType<
@@ -20,7 +19,6 @@ type RequestType = InferRequestType<
 
 // useCreateWorkspaceとして作成し、再利用可能にする
 export const useUpdateProject = () => {
-  const router = useRouter();
   const queryClient = useQueryClient();
   // 第1型引数 (ResponseType): 成功時のレスポンス型。
   // 第2型引数 (Error): エラー時の型。
@@ -38,7 +36,6 @@ export const useUpdateProject = () => {
     },
     onSuccess: ({ data }) => {
       toast.success('Peoject updated');
-      router.refresh();
       queryClient.invalidateQueries({ queryKey: ['projects'] });
       queryClient.invalidateQueries({ queryKey: ['project', data.$id] });
     },
