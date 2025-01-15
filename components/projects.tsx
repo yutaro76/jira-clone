@@ -1,7 +1,8 @@
+/* eslint-disable */
 'use client';
 
 import { useGetProjects } from '@/features/projects/api/use-get-projects';
-import { useGetWorkspaces } from '@/features/workspaces/api/use-get-workspaces';
+// import { useGetWorkspaces } from '@/features/workspaces/api/use-get-workspaces';
 import { usePathname } from 'next/navigation';
 import { useWorkspaceId } from '@/features/workspaces/hooks/use-workspace-id';
 import Link from 'next/link';

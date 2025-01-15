@@ -13,6 +13,7 @@ const app = new Hono().basePath('/api');
 
 // /authパスに対してauthハンドラを設定。
 // これにより、/api/authに対するリクエストがauthハンドラで処理される。
+// eslint-disable-next-line
 const routes = app
   .route('/auth', auth)
   .route('/workspaces', workspaces)

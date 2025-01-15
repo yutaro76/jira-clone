@@ -4,7 +4,6 @@ import { CreateProjectModal } from '@/features/projects/components/create-projec
 import { CreateTaskModal } from '@/features/tasks/components/create-task-modal';
 import { EditTaskModal } from '@/features/tasks/components/edit-task-modal';
 import { CreateWorkspaceModal } from '@/features/workspaces/components/create-workspace-modal';
-import { Edit } from 'lucide-react';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
