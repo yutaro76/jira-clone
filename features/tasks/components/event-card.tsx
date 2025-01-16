@@ -1,5 +1,5 @@
 import { Project } from '@/features/projects/types';
-import { TaskStatus } from '../types';
+import { Assignee, TaskStatus } from '../types';
 import { cn } from '@/lib/utils';
 import { MemberAvatar } from '@/features/members/components/member-avatar';
 import { ProjectAvatar } from '@/features/projects/components/project-avatar';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 interface EventCardProps {
   title: string;
-  assignee: any;
+  assignee: Assignee;
   project: Project;
   status: TaskStatus;
   id: string;
@@ -32,6 +32,7 @@ export const EventCard = ({
   const workspaceId = useWorkspaceId();
   const router = useRouter();
 
+  // eslint-disable-next-line
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
 

@@ -18,3 +18,9 @@ export type Task = Models.Document & {
   dueDate: string;
   description?: string;
 };
+
+export type Assignee = {
+  id: string;
+  name: string;
+  imageUrl: string;
+};

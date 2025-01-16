@@ -16,16 +16,14 @@ import {
 import { DottedSeparator } from '@/components/dotted-separator';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-// import { useCreate } from '../api/use-create-workspace';
 import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { ArrowLeftIcon, ImageIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Project } from '../types';
 import { useUpdateProject } from '../api/use-update-project';
 import { useConfirm } from '@/hooks/use-confirm';
-import { toast } from 'sonner';
 import { useDeleteProject } from '../api/use-delete-project';
 
 // 他のファイルでも使用するため型を定義
@@ -40,6 +38,7 @@ export const EditProjectForm = ({
 }: EditPeojectFormProps) => {
   const router = useRouter();
   const { mutate, isPending } = useUpdateProject();
+  // eslint-disable-next-line
   const { mutate: deleteProject, isPending: isDeletingProject } =
     useDeleteProject();
 

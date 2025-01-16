@@ -6,7 +6,6 @@ import { InferRequestType, InferResponseType } from 'hono';
 
 // clientを使ってAPIエンドポイントにリクエストを送信する。
 import { client } from '@/lib/rpc';
-import { use } from 'react';
 import { useRouter } from 'next/navigation';
 
 // レスポンスを型として利用可能にする

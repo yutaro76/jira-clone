@@ -6,7 +6,7 @@ import { InferRequestType, InferResponseType } from 'hono';
 
 // clientを使ってAPIエンドポイントにリクエストを送信する。
 import { client } from '@/lib/rpc';
-import { use } from 'react';
+
 import { useRouter } from 'next/navigation';
 
 // レスポンスを型として利用可能にする
@@ -21,6 +21,7 @@ type RequestType = InferRequestType<
 
 // useCreateTaskとして作成し、再利用可能にする
 export const useBulkUpdateTasks = () => {
+  // eslint-disable-next-line
   const router = useRouter();
   const queryClient = useQueryClient();
   // 第1型引数 (ResponseType): 成功時のレスポンス型。
